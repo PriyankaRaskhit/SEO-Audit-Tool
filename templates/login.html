@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Login-Rankraze technologies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body background="static/images/homebg.jpg" style="background-repeat: no-repeat;background-attachment: fixed;background-size: 100% 100%;">
+    <section>
+        <div class="imgbox">
+            <img src="static/images/loginnbg.png">
+        </div>
+<div class="contentbox">
+    <div class="formbox">
+        <h2>Login</h2>
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.username }}<br>
+            {{ form.password }}<br>
+            {{ form.submit }}<br>
+        </form>
+        <p>Not a member? <a href="{{url_for('register')}}">Sign Up Now</a></p>
+<!-- <div class="social-media">
+        <P>Login with Social Media</P>
+<div class="social">
+<i class="fa fa-facebook"></i>
+<i class="fa fa-twitter"></i>
+<i class="fa fa-instagram"></i>
+<i class="fa fa-whatsapp"></i>
+</div> 
+</div> -->
+
+    </div>
+</div>
+</section>
+
+    <link rel="stylesheet" href="static/css/style.css">
+</body>
+</html>

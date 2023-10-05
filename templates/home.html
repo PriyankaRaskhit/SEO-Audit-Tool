@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Login-Rankraze technologies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+.button-7 {
+  background-color: #07644a;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  
+}
+
+.button-7:hover,
+.button-7:focus {
+  background-color: rgb(18, 118, 110);
+}
+
+.button-7:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-7:active {
+  background-color: #0e8437;
+  box-shadow: none;
+}
+.primary-icon{
+  height: 80px;
+}
+@media all and (max-width: 480px){
+  .navbar{
+    flex-direction: column;
+  }
+
+}
+    </style>
+</head>
+<body background="static/images/resultbg.jpg" style="background-repeat: no-repeat;background-attachment: fixed;background-size: 100% 100%;">
+
+  <section>
+      <div class="imgbox">
+        <img src="static/images/homebgpic.png">
+      </div>
+<div class="contentbox">
+    <div class="formbox">
+         <!-- <img src="static/images/RANKRAZE.png"> 
+        <strong><p style="font-size: xx-large; color: #0a2253;">SEO RANK CHECKER</p></strong> -->
+        <center><img class="primary-icon" src="static/images/logo.png"> </center>
+        <strong> <H2 style="font-size: xx-large; color: #0a2253;">Track your positions <br> to know your competitors !!!</H2></strong>
+        <h4>Allows you to keep an eye on how your website is performing for key search terms and lets you know the position of your website with the provided keywords</h4>     
+        <center>
+          <a href="{{url_for('login')}}"><button class="button-8">Get Started !</button></a>
+        </center>
+</div>
+</div>
+    </div>
+</div>
+</section>
+</body>
+</html>

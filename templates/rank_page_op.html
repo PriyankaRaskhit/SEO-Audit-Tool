@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css";/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body class="A4"  style="background-repeat: no-repeat;background-attachment: fixed;background-size: 100% 100%;">
+  {% block content %} 
+ <a href="{{url_for('logout')}}"><button class="button-7">Logout</button></a>&ensp;
+<button class="button-8" onclick="history.back()">Back</button>
+<section id="report" style="align-items: center; padding-left: 20px;padding-right: 20px;">
+    <br><br>
+    <section class="top-content bb d-flex justify-content-between">
+      <div class="logo ">
+        <img src="static/images/RANKRAZE.png" alt="" class="img-fluid" style="float: left; height: 90px;">
+        <h3 style="align-content: center; color: #0D3B5B;">&ensp;&ensp;<b>Report of <i>{{website_name}}</i></b></h3>
+          <h5>&ensp;&ensp;&ensp;&ensp;Generated on <i><span id='date-time'></span></i></h5>
+          <br>
+          <p> </p>
+      </div>
+    </section>
+    <div class="row">
+      <div class="column">
+        <br>
+        <p id="main" style="color: rgb(1, 36, 70);"><b>INTRODUCTION :</b></p>
+      </div>
+      <div class="column">
+        <p id="content"><i>This SEO Tool Report helps in optimizing search engine rankings and improving online visibility. This tool provide valuable insights to improve the overall health and success of your website . The report highlights key features and benefits of SEO tools, such as SSL certificate information, Analytics,Sitemap and Meta tag. The report acknowledges challenges and limitations while emphasizing the transformative impact of SEO tools in driving digital success.</i></p>
+      </div>
+    </div> 
+    </div>
+    <div class="row">
+      <p id="main">TABLE OF CONTENT</p>
+      <div class="column" style="float: left;width: 50%;padding: 10px;">
+        <ul>
+          <p id="content"><i><li><a href="#1">On page SEO</a></li></i></p>
+          <p id="content"><i><li><a href="#2">Keyword Analysis</a></li></i></p>
+          <p id="content"><i><li><a href="#3">Performance</a></li></i></p>
+        </ul>
+      </div>
+      <div class="column" style="float: left;width: 50%;padding: 10px;">
+        <ul>
+          <p id="content"><i><li><a href="#4">Social media Report</a></li></i></p>
+            <p id="content"><i><li><a href="#5">Links</a></li></i></p>
+        </ul>
+      </div>
+    </div>
+    <div class="sidebar">
+      <p class="main" id="1" style="font-size: large; background-color: #dee0e0;"> &nbsp; &nbsp;ON PAGE SEO RESULTS</p>
+    </div>
+  <br>
+    <div class="result sidebar">
+      <p id="main">TITLE TAG</p>
+      <p id="content">Title: {{ title }}</p>
+      <i><p id="content">Length: {{ len_title }} Character(s)</p></i>
+      {% if len_title>=156 %}
+      <p id="content"><span class="glyphicon glyphicon-remove" id="wrong"></span>&ensp;Your title length is too long!!!</p>
+      {% elif len_title<=70 %}
+      <p id="content"><span class="glyphicon glyphicon-remove" id="wrong"></span>&ensp;Your title length is too short!!!</p>
+      {% else %}
+      <p id="content"><span class="glyphicon glyphicon-ok" id="correct"></span>&ensp;Great! Maintain the same title length</p>
+      {% endif %}
+    </div>
+<br>
+    <div class="result sidebar">
+      <p id="main">META TAG</p>
+      <p id="content">Description: {{ cont }}</p>
+      <i><p id="content">Length: {{ desc_len }} Character(s)</p></i>
+      {% if desc_len>=160 %}
+      <p id="content"><span class="glyphicon glyphicon-remove" id="wrong"></span>&ensp;Your description length is too long!!!</p>
+      {% elif desc_len<=120 %}
+      <p id="content"><span class="glyphicon glyphicon-remove" id="wrong"></span>&ensp;Your description length is too short!!!</p>
+      {% else %}
+      <p id="content"><span class="glyphicon glyphicon-ok" id="correct"></span>&ensp;Great! Maintain the same description length</p>
+      {% endif %}
+    </div>
+  <br>
+    <div class="result sidebar">
+      <p id="main">HEADER TAGS COUNT</p>
+      <nav>
+      <ul>
+        {% for tag, count in header_count.items() %}
+        <li>{{ count }}</li>
+        {% endfor %}
+      </ul>
+      </nav>
+    </div>
+  <br>
+    <div class="result sidebar">
+      <p id="main">H1 TAG CONTENT</p>
+    
+       <p id="content">{{h1_tag}}</p>
+    </div>
+  <br>
+    <div class="result sidebar">
+      <p id="main"> AMOUNT OF CONTENT</p>
+      <p id="content">{{ content }} Character(s)</p>
+    </div>
+  <br>
+    <div class="result sidebar">
+      <p id="main"> ALT COUNT TAG</p>
+      <p id="content"><span class="glyphicon glyphicon-floppy-save" id="correct"></span>&ensp;Alt Tags:{{ alt_count }}</p>
+      <p id="content"><span class="glyphicon glyphicon-floppy-remove" id="wrong"></span>&ensp;Non-Alt Tags:{{ non_alt_count }}</p>
+    </div>
+  <br>
+    <div class="result sidebar">
+      <p id="main">  SECURE SOCKET LAYER(SSL)</p>
+      {% if ssl_status %}
+     <p id="content"><span class="glyphicon glyphicon-ok" id="correct"></span>&ensp;SSL is enabled for the website</p>
+      {% else %}
+       <p id="content"><span class="glyphicon glyphicon-remove" id="wrong"></span>&ensp;SSL is not enabled for the website</p>
+      {% endif %}
+      <p></p>
+    </div>
+<br>
+  <div class="result sidebar">
+    <p id="main"> SSL CERTIFICATE INFORMATION</p>
+        {% if expiration_date %}
+      <p id="content"> Expiration Date: {{ expiration_date }}</p>
+      {% if days_left %}
+      <p id="content"><span class="glyphicon glyphicon-calendar" id="wrong"></span>&ensp;Days to Expiration: {{ days_left }} Days</p>
+      {% if is_valid %}
+       <p id="content"> <span class="glyphicon glyphicon-ok" id="correct"></span>&ensp;The SSL certificate is valid.</p>
+      {% else %}
+         <p> <span class="glyphicon glyphicon-remove" id="wrong"></span>&ensp;The SSL certificate has expired.</p>
+      {% endif %}
+    {% else %}
+    <p id="content"> <span class="glyphicon glyphicon-question" id="wrong"></span>&ensp;Failed to retrieve SSL certificate information.</p>
+    {% endif %}
+    {% endif %}
+  </div>
+<br>
+  <div class="result sidebar">
+    <p id="main"> ROBOTS TXT</p>
+    {% if robots %}
+     <p id="content"> <span class="glyphicon glyphicon-ok" id="correct"></span>&ensp;Good,Your website have Robot.txt file!!!</p>
+    {% else %}
+    <p id="content"> <span class="glyphicon glyphicon-remove" id="wrong"></span>&ensp; Your website don't have Robot.txt file!!!</p>
+    {% endif %}
+  </div>
+<br>
+<div class="result sidebar">
+  <p id="main"> &nbsp; &nbsp;SITE MAP</p>
+  <p id="content"> &nbsp; &nbsp;Sitemap count:{{ sitemap_count }}</p>
+  {% if sitemap_allowed %}
+    {% if sitemap_count!=0 %}
+    <p id="content"> &nbsp;<span class="glyphicon glyphicon-ok" id="correct"></span>&ensp; Good,Your website have Sitemap.xml file!!!</p>
+    {% else %}
+    <p id="content"> &nbsp;<span class="glyphicon glyphicon-remove" id="wrong"></span>&ensp;Your website don't have Sitemap.xml file!!!</p>
+    {% endif %}  
+  {% else %}
+  <p id="content"> &nbsp;<span class="glyphicon glyphicon-remove" id="wrong"></span>&ensp; {{error_message }}</p>
+  {% endif %}
+</div>
+<br>
+  <div class="result sidebar">
+    <p id="main">  ANALYTICS</p>
+    {% if analytics %}
+    <p id="content"><span class="glyphicon glyphicon-ok" id="correct"></span>&ensp; Google Analytics is registered on your website.</p>
+    {% else %}
+     <p id="content"><span class="glyphicon glyphicon-remove" id="wrong"></span>&ensp;Google Analytics is not registered on your website.</p>
+    {% endif %}
+  </div>
+  <br>
+  <div class="sidebar">
+    <p class="main" id="2" style="font-size: large; background-color: #dee0e0;"> &nbsp; &nbsp;KEYWORD ANALYSIS</p>
+  </div><br>
+  <div class="result sidebar">
+    <table>
+      {{ output_df.to_html(classes="table table-striped") | safe}}
+  </table>
+  </div>
+  <br>
+  <div class="sidebar">
+    <p class="main" id="3" style="font-size: large; background-color: #dee0e0;"> &nbsp; &nbsp;PERFORMANCE</p>
+  </div><br>
+  <div class="result sidebar">
+    <p id="main">PAGE SPEED</p>
+    <p id="content">{{ page_loading_speed }} seconds</p>
+  </div>
+  <br>
+  <div class="result sidebar">
+    <p id="main">PAGE SIZE</p>
+    {% if page_size %}
+      <p id = "content">The page size is appoximately {{ page_size|round(2) }} MB</p>
+    {% endif %}
+  </div>
+  <br>
+  <div class="result sidebar">
+    <p id="main">RESOURCES</p>
+    <ul>
+      {% for key, value in technologies.items() %}
+      <p id="content"><span class="glyphicon glyphicon-ok" id="correct"></span>&ensp;{{ key }} : {{ value }}</p>
+      {% endfor %}
+    </ul>
+  </div>
+  <br>
+  <div class="result sidebar">
+    <p class="main" id="4" style="font-size: large; background-color: #dee0e0;"> &nbsp; &nbsp;SOCIAL MEDIA REPORT</p>
+  </div><br>
+  <div class="result sidebar">
+    <ul>
+    {% for platform, result in report.items() %}
+    <p id="content"><li>{{platform }} - {{result}} </li></p>
+    {% endfor %}
+    </ul>
+  </div>
+  <br>
+  <div class="sidebar">
+    <p class="main" id="5" style="font-size: large; background-color: #dee0e0;"> &nbsp; &nbsp;LINKS</p>
+  </div><br>
+  <div class="result sidebar">
+    <p id="main">ON PAGE LINKS</p>
+    <p id="content">Total Links: {{total_links}}</p>
+    <p id="content">Total Internal Links: {{total_internal_urls}}</p>
+    <p id="content">Total External Links: {{total_external_urls}}</p>
+    <p id="content">Duplicate Links: {{remaining_links}}</p>
+  </div>
+</section>
+&ensp;<br>
+<button class="btn btn-primary" id="download">Download your Report ! </button>
+<p> </p>
+
+</body>
+<style>
+
+:root{
+  --darkWhite:rgb(187, 187, 187);
+}
+
+
+.bb{
+  border-bottom: 3px solid var(--darkWhite);
+  
+}
+
+.sidebar{
+  border-left: 6px solid #0D3B5B;
+  padding-right:2mm;
+  padding-left:2mm;
+}
+   
+   .button-8 {
+float: left;
+background-color: #07644a;
+border: 1px solid transparent;
+border-radius: 3px;
+box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+box-sizing: border-box;
+color: #fff;
+cursor: pointer;
+display: inline-block;
+font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+font-size: 13px;
+font-weight: 400;
+line-height: 1.15385;
+margin: 0;
+outline: none;
+padding: 8px .8em;
+position: relative;
+text-align: center;
+text-decoration: none;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+vertical-align: baseline;
+white-space: nowrap;
+}
+
+.button-8:hover,
+.button-8:focus {
+background-color: rgb(18, 118, 110);
+}
+
+.button-8:focus {
+box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-8:active {
+background-color: #0e8437;
+box-shadow: none;
+}
+.button-7 {
+float: right;
+background-color: #07644a;
+border: 1px solid transparent;
+border-radius: 3px;
+box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+box-sizing: border-box;
+color: #fff;
+cursor: pointer;
+display: inline-block;
+font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+font-size: 13px;
+font-weight: 400;
+line-height: 1.15385;
+margin: 0;
+outline: none;
+padding: 8px .8em;
+position: relative;
+text-align: center;
+text-decoration: none;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+vertical-align: baseline;
+white-space: nowrap;
+}
+
+.button-7:hover,
+.button-7:focus {
+background-color: rgb(18, 118, 110);
+}
+
+.button-7:focus {
+box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-7:active {
+background-color: #0e8437;
+box-shadow: none; 
+}
+  #wrong{
+    color: red;
+  }
+#correct{
+  color: green;
+}
+#main{
+  font-size: 14;
+  font-weight: bold;
+}
+#content{
+  font-size: 12;
+}
+.main{
+  font-size: 14;
+  font-weight: bold;
+}
+.body{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+ </style>
+  <script>
+  var element = document.getElementById('report');
+  let btnd = document.querySelector("#download");
+  const opts = {
+      margin: 5,
+      filename :'result.pdf',
+      image: { type: 'jpg', quality: 1 },
+      html2canvas: {
+          backgroundColor: "#fff",
+          scale: window.devicePixelRatio,
+          y: 0,
+          x: 0,
+          scrollY: 0,
+          scrollX: 0,
+          windowWidth: 800,
+      },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', precision: 32 }
+      };
+  btnd.addEventListener('click',()=>{
+      html2pdf().set(opts).from(element).save();
+      html2pdf(element, opts);
+  })
+  var dt = new Date();
+  document.getElementById('date-time').innerHTML=dt;
+</script>
+</html>
+{% endblock %}
